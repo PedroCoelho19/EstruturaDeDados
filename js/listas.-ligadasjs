@@ -1,0 +1,103 @@
+class LinkedList {
+  constructor(element) {
+    this.length = 0;
+    this.head = null;
+  }
+
+  append(element) {
+    var node = { element: element, next: null },
+      current;
+
+    if (!this.head) {
+      this.head = node;
+    } else {
+      current = this.head;
+
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = node;
+    }
+    this.length++;
+  }
+
+  insert(position, element) {
+    if( position >= 0 && position <= this.length){
+        var node = { element: element, next: null },
+        current = this.head,
+        previous,
+        index = 0
+
+        if(position == 0){
+            node.next = current
+            this.head = node
+        }else{
+            while(index++ < position){
+                previous = current
+                current = current.next
+            }
+            node.next = current
+            previous.next = node
+        }
+        this.length++
+        return true
+    }else{
+        return false
+    }
+  }
+
+  removeAt(position) {
+    if (position > -1 && position < this.length) {
+      var current = this.head,
+        previous,
+        index = 0;
+
+      if (position === 0) {
+        this.head = current.next;
+      } else {
+        while (index++ < position) {
+          previous = current;
+          current = current.next;
+        }
+        previous.next = current.next;
+      }
+      this.length--;
+      return current.element;
+    } else {
+      return null;
+    }
+  }
+
+  remove(element) {}
+
+  indexOf(element) {}
+
+  isEmpty(element) {}
+
+  size() {}
+
+  toString() {
+    var current = this.head,
+      string = "";
+
+    while (current) {
+      string += current.element + " ";
+      current = current.next;
+    }
+    return string;
+  }
+
+  print() {
+    console.log(this.toString());
+  }
+}
+
+var link = new LinkedList();
+link.append("Pedro");
+link.append("Filipe");
+link.append("Coelho");
+link.print()
+link.insert(1, "Mariana")
+link.print();
+link.insert(0, "Gadelha")
+link.print()
