@@ -1,11 +1,15 @@
 class LinkedList {
   constructor(element) {
+    this.element = element  
+    this.next = null
+    this.prev = null
     this.length = 0;
     this.head = null;
+    this.tail = null
   }
-
+  
   append(element) {
-    var node = { element: element, next: null },
+   var node = new LinkedList(element),
       current;
 
     if (!this.head) {
@@ -68,13 +72,36 @@ class LinkedList {
     }
   }
 
-  remove(element) {}
+  remove(element) {
+    var index =  this.indexOf(element); 
+    return this.removeAt(index)
+  }
 
-  indexOf(element) {}
+  indexOf(element) {
+    var current =  this.head,
+    index = 0
 
-  isEmpty(element) {}
+    while(current){
+      if(element === current.element){
+        return index;
+      }
+      index++
+      current = current.next
+    }
+    return -1
+  }
 
-  size() {}
+  isEmpty(element) {
+    return this.length == 0
+  }
+
+  size() {
+    return this.length
+  }
+
+  getHead(){
+    return this.head
+  }
 
   toString() {
     var current = this.head,
@@ -92,6 +119,7 @@ class LinkedList {
   }
 }
 
+
 var link = new LinkedList();
 link.append("Pedro");
 link.append("Filipe");
@@ -100,4 +128,5 @@ link.print()
 link.insert(1, "Mariana")
 link.print();
 link.insert(0, "Gadelha")
+// console.log(link.getHead("Filipe"))
 link.print()
