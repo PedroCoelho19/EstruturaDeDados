@@ -65,7 +65,42 @@ class DoublyLinkedList {
     }
   }
 
-  removeAt(position) {}
+  removeAt(position) {
+    if(position > -1 && position < this.length){
+      var current = this.head,
+      previous,
+      index = 0
+
+      if(position == 0){
+        this.head = current.next
+
+        if(this.length == 1){
+          this.tail = null
+        }else{
+          console.log("Pedro 1")
+          this.head.prev = null
+        }
+      }else if(position == this.length - 1){
+        console.log("Pedro 2")
+        current = this.tail
+        this.tail = current.prev
+        this.tail.next = null
+      }else{
+        console.log("Pedro 3")
+
+        while(index ++ < position){
+          previous = current
+          current = current.next
+        }
+        previous.next = current.next
+        current.next.prev = previous
+      }
+      this.length --
+      return current.element
+    }else{
+      return null
+    }
+  }
 
   remove(element) {
     var index = this.indexOf(element);
@@ -114,7 +149,6 @@ class DoublyLinkedList {
   }
 }
 
-
 var dll = new DoublyLinkedList()
 dll.append("Pedro")
 dll.append("Filipe")
@@ -122,4 +156,10 @@ dll.append("Ferreira")
 dll.insert(0 , "Alba")
 dll.insert(4 , "Mariana")
 dll.insert(5 , "Leandro")
+dll.print()
+dll.removeAt(0)
+dll.print()
+dll.removeAt(4)
+dll.print()
+dll.removeAt(2)
 dll.print()
