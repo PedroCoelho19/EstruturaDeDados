@@ -86,7 +86,7 @@ class Queue {
     console.log(this.items);
   }
 }
-
+    
 class Graph {
   constructor() {
     (this.vertices = []), (this.adjlist = new Dictionary());
@@ -142,6 +142,29 @@ class Graph {
       callback(u);
     }
   }
+
+  dfs(callback){
+    var color = this.initializeColor()
+    for(var i = 0; i < this.vertices.length; i++){
+      if(color[this.vertices[i]] == 'white'){
+        this.dfsVisit(this.vertices[i], color ,callback)
+      }
+    }
+  }
+
+  dfsVisit(u, color, callback){
+    color[u] = 'grey'
+    callback(u)
+
+    var neighbors = this.adjlist.get(u)
+    for(var i =  0;  i < neighbors.length ; i++){
+      var w = neighbors[i]
+      if(color[w] == 'white'){
+        this.dfsVisit(w, color , callback)
+      }
+    }
+    color[u] = 'black'
+  }
 }
 
 function printNode(value) {
@@ -167,4 +190,5 @@ graph.addEdge("E", "I");
 
 // console.log(graph.toString());
 
-graph.bfs(myVertices[0], printNode)     
+// graph.bfs(myVertices[0], printNode)     
+graph.dfs(printNode) 
